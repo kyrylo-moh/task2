@@ -31,6 +31,7 @@ public class Envelope {
             scanner.next();//recursion
             num = getDouble();
         }
+
         return num;
     }
 }
