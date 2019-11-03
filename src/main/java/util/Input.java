@@ -4,24 +4,30 @@ import java.util.Scanner;
 
 public class Input {
 
-    private static Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
+    private Output output = new Output();
+    private Validator validator = new Validator();
 
-    public static double getDouble() {
+    public double getDouble() {
         double num;
-        Output.getMsg("Input number:");
+        output.getMsg("Input number:");
         if (scanner.hasNextDouble()) {
             num = scanner.nextDouble();
-            if (!Validator.numIsPositive(num)) {
-                Output.getMsg("Your must input number > 0");
+            if (!validator.numIsPositive(num)) {
+                output.getMsg("Your must input number > 0");
                 scanner.next();
                 num = getDouble();
             }
         } else {
-            Output.getInstruction();
+            output.getInstruction();
             scanner.next();
             num = getDouble();
         }
         return num;
+    }
+
+    public String getAnswer() {
+        return scanner.next();
     }
 
 }

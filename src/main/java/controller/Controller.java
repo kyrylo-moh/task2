@@ -9,19 +9,21 @@ import java.util.Scanner;
 
 public class Controller {
 
+    private Service service = new Service();
+    private Output output = new Output();
+    private Input input = new Input();
     private Envelope envelope1 = new Envelope();
     private Envelope envelope2 = new Envelope();
 
     private void enterEnvelopes () {
         try {
-            Scanner scanner = new Scanner(System.in);
-            envelope1.setHeight(Input.getDouble());
-            envelope1.setWidth(Input.getDouble());
-            envelope2.setHeight(Input.getDouble());
-            envelope2.setWidth(Input.getDouble());
+            envelope1.setHeight(input.getDouble());
+            envelope1.setWidth(input.getDouble());
+            envelope2.setHeight(input.getDouble());
+            envelope2.setWidth(input.getDouble());
         }
         catch (Exception excpt) {
-            Output.getMsg(excpt.toString());
+            output.getMsg(excpt.toString());
         }
     }
 
@@ -30,13 +32,19 @@ public class Controller {
         String answer;
         do {
             enterEnvelopes();
-            if (Service.compare(envelope1, envelope2)) {
-                Output.getMsg("The first envelope will contain the second envelope");
-            } else {
-                Output.getMsg("The second envelope will contain the first envelope");
+            if (envelope1.equals(envelope2)) {
+                output.getMsg("Envelopes are equals and don`t contain one of one`s");
+                service.printEnvelopeParam(envelope1, envelope2);
             }
-            Output.getMsg("Do you want to continue?\t y/n");
-            answer = scanner.nextLine();
+            else if (service.compare(envelope1, envelope2)) {
+                output.getMsg("The first envelope will contain the second envelope");
+                service.printEnvelopeParam(envelope1, envelope2);
+            } else {
+                output.getMsg("The second envelope will contain the first envelope");
+                service.printEnvelopeParam(envelope1, envelope2);
+            }
+            output.getMsg("Do you want to continue?\t y/n");
+            answer = input.getAnswer();
         } while (answer.equalsIgnoreCase("y") ||
                 answer.equalsIgnoreCase("yes"));
     }

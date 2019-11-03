@@ -14,6 +14,22 @@ public class Envelope implements Comparable<Envelope> {
         this.height = height;
     }
 
+    public double getWidth() {
+        return width;
+    }
+
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
     public int compareTo(Envelope object) {
         if (this.getHeight() > object.getHeight()) {
             if (this.getWidth() > object.getWidth()) {
@@ -23,20 +39,11 @@ public class Envelope implements Comparable<Envelope> {
         return -1;
     }
 
-    private double getWidth() {
-        return width;
-    }
-
-    public void setWidth(double width) {
-        this.width = width;
-    }
-
-    private double getHeight() {
-        return height;
-    }
-
-    public void setHeight(double height) {
-        this.height = height;
+    public boolean equals(Envelope obj) {
+        if (this.getHeight() == obj.getHeight()) {
+            return this.getWidth() == obj.getWidth();
+        }
+        return false;
     }
 
 }
